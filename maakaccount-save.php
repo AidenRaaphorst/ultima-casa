@@ -3,10 +3,10 @@
 
     $db = ConnectDB();
      
-    $naam = $_GET['Naam'];
-    $email = $_GET['Email'];
-    $telefoon = $_GET['Telefoon'];
-    $wachtwoord = $_GET['Wachtwoord'];
+    $naam = $_POST['Naam'];
+    $email = $_POST['Email'];
+    $telefoon = $_POST['Telefoon'];
+    $wachtwoord = $_POST['Wachtwoord'];
 
     $sql = "INSERT INTO relaties (Naam, Email, Telefoon, Wachtwoord, FKrollenID)
                       VALUES ('" . $naam . "', '" .
@@ -41,5 +41,5 @@
      {    $result .= 'Fout bij het bewaren van uw gegevens.<br><br>' . $sql;
      }
      echo $result . '<br><br>
-          <button class="action-button"><a href="index.html">Ok</a></button>';
+          <button class="action-button"><a href="index.php">Ok</a></button>';
 ?>

@@ -26,7 +26,7 @@
                          <tr>
                               <td>&nbsp;</td>
                               <td>               
-                                   <form action="maakaccount-save.php" method="GET">
+                                   <form action="maakaccount-save.php" method="POST">
                                         <p id="pass-validate" style="color: red"></p>
                                         <p id="agree-tos-validate" style="color: red"></p>
                                         <div class="form-group">
