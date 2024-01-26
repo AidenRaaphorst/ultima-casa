@@ -27,6 +27,8 @@
                               <td>&nbsp;</td>
                               <td>               
                                    <form action="maakaccount-save.php" method="GET">
+                                        <p id="pass-validate" style="color: red"></p>
+                                        <p id="agree-tos-validate" style="color: red"></p>
                                         <div class="form-group">
                                              <label for="Naam">Naam:</label>
                                              <input type="text" class="form-control" id="Naam" name="Naam" placeholder="Naam" required>
@@ -41,10 +43,18 @@
                                              <input type="password" class="form-control" id="Wachtwoord" name="Wachtwoord" placeholder="Wachtwoord" required>
                                         </div>
                                         <div class="form-group">
+                                             <label for="Wachtwoord-Herhalen">Wachtwoord herhalen:</label>
+                                             <input type="password" class="form-control" id="Wachtwoord-Herhalen" name="Wachtwoord-Herhalen" placeholder="Wachtwoord herhalen" required>
+                                        </div>
+                                        <div class="form-group">
                                              <label for="Telefoon">Mobiel telefoonnummer:</label>
                                              <input type="tel" class="form-control" id="Telefoon" name="Telefoon" 
                                                     placeholder="Telefoonnummer" 
                                                     pattern="' . $telefoonpattern . '" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="checkbox" name="agree-tos" id="agree-tos">
+                                            <label for="agree-tos">Ik accepteer de Terms of Service</label>
                                         </div>
                                         <div class="form-group"><br><br>
                                              <button type="submit" class="action-button" title="Uw account aanmaken">Maak account</button>
@@ -57,6 +67,38 @@
                     </table>
                </div>
           </div>
+          
+          <script>
+              const form = document.querySelector("form");
+              const pass = form.querySelector("#Wachtwoord");
+              const passRepeat = form.querySelector("#Wachtwoord-Herhalen");
+              const tosCheck = form.querySelector("#agree-tos");
+              const passValidate = form.querySelector("#pass-validate");
+              const tosValidate = form.querySelector("#agree-tos-validate");
+              
+              form.addEventListener("submit", (e) => {
+                  e.preventDefault()
+                  if(pass.value !== passRepeat.value) {
+                      passValidate.innerText = "Wachtwoorden komen niet overeen";
+                  } else if(!pass.value.match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)) {
+                      passValidate.innerHTML = "Wachtwoord voldoet niet aan de eisen: <br/> " +
+                        "minimaal 8 tekens, <br/> " +
+                        "minimaal 1 hoofdletter, <br/> " +
+                        "minimaal 1 kleine letter, <br/> " +
+                        "minimaal 1 speciaal teken";
+                      return;
+                  }
+                  
+                  if(!tosCheck.checked) {
+                      tosValidate.innerHTML = "Je moet de Terms of Service accepteren om een account te maken";
+                      return;
+                  }
+                  
+                  passValidate.innerHTML = "";
+                  tosValidate.innerHTML = "";
+                  form.submit();
+              });
+        </script>
      </body>
 </html>';
 
