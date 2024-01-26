@@ -1,20 +1,21 @@
 <?php
-     include_once("functions.php");
+    include_once("functions.php");
 
-     $db = ConnectDB();
+    $db = ConnectDB();
      
-     $naam = $_GET['Naam'];
-     $email = $_GET['Email'];
-     $telefoon = $_GET['Telefoon'];
-     $wachtwoord = $_GET['Wachtwoord'];
-     
-     $sql = "INSERT INTO relaties (Naam, Email, Telefoon, Wachtwoord)
-                  VALUES ('" . $naam . "', '" . 
-                               $email . "', '" .
-                               $telefoon . "', '" . 
-                               md5($wachtwoord) . "')";
-     
-     if ($db->query($sql) == true) 
+    $naam = $_GET['Naam'];
+    $email = $_GET['Email'];
+    $telefoon = $_GET['Telefoon'];
+    $wachtwoord = $_GET['Wachtwoord'];
+
+    $sql = "INSERT INTO relaties (Naam, Email, Telefoon, Wachtwoord, FKrollenID)
+                      VALUES ('" . $naam . "', '" .
+                        $email . "', '" .
+                        $telefoon . "', '" .
+                        md5($wachtwoord) . "', '" .
+                        10 . "')";
+
+     if ($db->query($sql) == true)
      {    if (StuurMail($email, 
                         "Account gegevens Ultima Casa", 
                         "Uw inlog gegevens zijn:
