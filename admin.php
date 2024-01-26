@@ -5,15 +5,23 @@
      $db = ConnectDB();
      
      $relatieid = $_GET['RID'];
-     $sql = "   SELECT ID, 
-                       Naam, 
-                       Email, 
-                       Telefoon
+     $sql = "   SELECT relaties.ID, 
+                       relaties.Naam, 
+                       relaties.Email, 
+                       relaties.Telefoon,
+                       relaties.FKRollenID,
+                       rollen.naam AS rol
                   FROM relaties
-                 WHERE ID = " . $relatieid;
+                  INNER JOIN rollen ON relaties.FKRollenID=rollen.ID
+                 WHERE relaties.ID = " . $relatieid;
      
      $gegevens = $db->query($sql)->fetch();
-     
+
+     if($gegevens["rol"] !== "admin") {
+         header("Location: index.php");
+         return;
+     }
+
      echo 
     '<!DOCTYPE html>
      <html lang="nl">
