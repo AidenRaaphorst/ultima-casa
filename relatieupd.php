@@ -22,11 +22,13 @@
                <div class="container">
                     <div class="col-sm-5 col-md-7 col-lg-5 col-sm-offset-4 col-md-offset-3 col-lg-offset-4">
                          <h3>Mijn account wijzigen</h3>';
-     
+
+     $tes = "";
+
      $sql = "UPDATE relaties 
-                SET Naam = '" . $_GET['Naam'] . "',
+                SET Naam = '" . htmlspecialchars($_GET['Naam']) . "',
                     Email = '" . $_GET['Email'] . "',
-                    Telefoon = '" . $_GET['Telefoon'] . "' ";
+                    Telefoon = '" . htmlspecialchars($_GET['Telefoon']) . "' ";
      if ($_GET["Wachtwoord"] == "")
      {    $wachtwoord = "Ongewijzigd";
      }
