@@ -18,6 +18,10 @@
      };
      if (isset($_GET['Zoek']) && !empty($_GET['Zoek']))
      {    $zoek = $_GET['Zoek'];
+          $zoek = str_replace("'", "", $zoek);
+          $zoek = str_replace("\"", "", $zoek);
+          $zoek = str_replace("=", "", $zoek);
+          $zoek = str_replace("%", "", $zoek);
           $filtered = 1;
      };
      
