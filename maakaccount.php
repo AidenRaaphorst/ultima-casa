@@ -35,8 +35,8 @@
                                         </div>
                                         <div class="form-group">
                                              <label for="Email">E-mailadres:</label>
-                                             <input type="email" class="form-control" id="Email" name="Email" placeholder="E-mailadres" required
-                                             pattern="' . $emailpattern . '">
+                                             <input type="email" class="form-control" id="Email" name="Email" placeholder="E-mailadres" required">
+                                             <p id="email-validate" style="color: red"></p>
                                         </div>
                                         <div class="form-group">
                                              <label for="Wachtwoord">Wachtwoord:</label>
@@ -49,8 +49,8 @@
                                         <div class="form-group">
                                              <label for="Telefoon">Mobiel telefoonnummer:</label>
                                              <input type="tel" class="form-control" id="Telefoon" name="Telefoon" 
-                                                    placeholder="Telefoonnummer" 
-                                                    pattern="' . $telefoonpattern . '" required>
+                                                    placeholder="Telefoonnummer" required>
+                                             <p id="telefoon-validate" style="color: red"></p>
                                         </div>
                                         <div class="form-group">
                                             <input type="checkbox" name="agree-tos" id="agree-tos">
@@ -72,8 +72,12 @@
               const form = document.querySelector("form");
               const pass = form.querySelector("#Wachtwoord");
               const passRepeat = form.querySelector("#Wachtwoord-Herhalen");
+              const emailInput = form.querySelector("#Email")
+              const telefoonInput = form.querySelector("#Telefoon")
               const tosCheck = form.querySelector("#agree-tos");
               const passValidate = form.querySelector("#pass-validate");
+              const emailValidate = form.querySelector("#email-validate");
+              const telefoonValidate = form.querySelector("#telefoon-validate");
               const tosValidate = form.querySelector("#agree-tos-validate");
               
               form.addEventListener("submit", (e) => {
@@ -94,8 +98,21 @@
                       return;
                   }
                   
+                  if(!emailInput.value.match(/' . $emailpattern . '/)) {
+                      emailValidate.innerHTML = "Email hoort er zo uit te zien: goede.email123@gmail.com";
+                      return;
+                  }
+                  
+                  if(!telefoonInput.value.match(/' . $telefoonpattern . '/)) {
+                      telefoonValidate.innerHTML = "Telefoonnummer hoort er zo uit te zien: 0612345678 of 06 12345678";
+                      return;
+                  }
+                  
                   passValidate.innerHTML = "";
                   tosValidate.innerHTML = "";
+                  emailValidate.innerHTML = "";
+                  telefoonValidate.innerHTML = "";
+                  
                   form.submit();
               });
         </script>
